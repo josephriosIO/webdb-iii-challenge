@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const getStudent = await studentDb.getById(id);
-    if (getStudent.length === 0) {
+    if (!getStudent) {
       res.status(400).json({ msg: "id does not exist" });
     } else {
       res.json(getStudent);
@@ -48,6 +48,20 @@ router.put("/:id", async (req, res) => {
       res.json(req.body);
     } else {
       res.status(404).json({ msg: "theres no student to update" });
+    }
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const getDeletedStudent = await studentDb.getById(req.params.id);
+    const deleteStudent = await studentDb.remove(req.params.id);
+    if (!deleteStudent) {
+      res.status(400).json({ msg: "id does not exist" });
+    } else {
+      res.json(getDeletedStudent);
     }
   } catch (err) {
     res.status(500).json({ msg: err.message });
