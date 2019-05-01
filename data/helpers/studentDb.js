@@ -14,7 +14,9 @@ function get() {
 
 function getById(id) {
   return db("students")
-    .where({ id })
+    .join("cohorts", "students.cohort_id", "cohorts.id")
+    .select("students.id", "students.name", "cohorts.name as cohort")
+    .where("students.id", id)
     .first();
 }
 
