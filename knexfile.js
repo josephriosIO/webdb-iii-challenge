@@ -7,5 +7,11 @@ module.exports = {
       filename: "./data/lambda.db3"
     },
     useNullAsDefault: true
+  },
+  migrations: {
+    directory: "./data/migrations"
+  },
+  seeds: {
+    directory: "./data/seeds"
   }
 };
