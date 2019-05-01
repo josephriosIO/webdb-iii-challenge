@@ -6,7 +6,8 @@ module.exports = {
     connection: {
       filename: "./data/lambda.db3"
     },
-    useNullAsDefault: true
+    useNullAsDefault: true,
+    debug: true
   },
   migrations: {
     directory: "./data/migrations"
