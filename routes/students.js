@@ -38,4 +38,20 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  if (!req.body.name) {
+    return res.status(404).json({ msg: "please enter a student name" });
+  }
+  try {
+    const updateStudent = await studentDb.update(req.body, req.params.id);
+    if (updateStudent > 0) {
+      res.json(req.body);
+    } else {
+      res.status(404).json({ msg: "theres no student to update" });
+    }
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
+});
+
 module.exports = router;
